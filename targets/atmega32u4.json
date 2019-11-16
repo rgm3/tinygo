@@ -1,0 +1,19 @@
+{
+	"inherits": ["avr"],
+	"llvm-target": "avr-atmel-none",
+	"cpu": "atmega32u4",
+	"build-tags": ["atmega32u4", "atmega", "avr5"],
+	"cflags": [
+		"-mmcu=atmega32u4"
+	],
+	"ldflags": [
+		"-Wl,--defsym=_bootloader_size=512",
+		"-Wl,--defsym=_stack_size=512",
+		"-T", "src/device/avr/atmega32u4.ld"
+	],
+	"extra-files": [
+		"targets/avr.S",
+		"src/device/avr/atmega32u4.s"
+	],
+	"flash-command": "avrdude -c arduino -p atmega32u4 -P {port} -U flash:w:{hex}"
+}
